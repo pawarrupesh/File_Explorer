@@ -13,7 +13,7 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
 }) => {
   const renderFileTree = (items: FolderItem["data"]) => {
     return items.map((item) => {
-      const { name, type, data } = item;
+      const { name, type } = item;
 
       return (
         <div key={`${type}-${name}`} className="file-item">
@@ -32,8 +32,10 @@ const FileExplorer: React.FC<FileExplorerProps> = ({
                 </span>
               </div>
 
-              {expandedFolders[name] && data && (
-                <div className="folder-contents">{renderFileTree(data)}</div>
+              {expandedFolders[name] && item?.data && (
+                <div className="folder-contents">
+                  {renderFileTree(item?.data)}
+                </div>
               )}
             </>
           ) : (
